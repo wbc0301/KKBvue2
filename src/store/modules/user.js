@@ -1,10 +1,8 @@
 import { getToken, setToken, removeToken } from "@/utils/auth";
 
-// 存储用户令牌和角色信息
-const state = {
+const state = {// 存储令牌和角色
   token: getToken(),
   roles: []
-  // 其他用户信息
 };
 
 const mutations = {
@@ -17,16 +15,14 @@ const mutations = {
 };
 
 const actions = {
-  // 用户登录动作 user/login  dispatch('user/login')
+  // 登录 user/login  dispatch('user/login')
   login({ commit }, userInfo) {
     const { username } = userInfo;
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (username === "admin" || username === "jerry") {
-            // 保存状态
-          commit("SET_TOKEN", username);
-        //   写入cookie
-          setToken(username);
+        if (username === "admin" || username === "jerry") {          
+          commit("SET_TOKEN", username); // 保存状态          
+          setToken(username); // 写入cookie
           resolve();
         } else {
           reject("用户名、密码错误");
@@ -35,13 +31,13 @@ const actions = {
     });
   },
 
-  // 获取用户角色等信息
+  // 获取角色
   getInfo({ commit, state }) {
     return new Promise((resolve) => {
       setTimeout(() => {
         const roles = state.token === 'admin' ? ['admin'] : ['editor']
         commit("SET_ROLES", roles);
-        resolve({roles});
+        resolve({ roles });
       }, 1000);
     });
   },
@@ -57,9 +53,4 @@ const actions = {
   }
 };
 
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-};
+export default { namespaced: true, state, mutations, actions };

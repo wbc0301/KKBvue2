@@ -9,26 +9,21 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      username: "admin"
-    };
-  },
-  methods: {
-    login() {
-      // 派发一个登录action
-      this.$store
-        .dispatch("user/login", { username: this.username })
-        .then(() => {
-          // 登录成功重定向
-          this.$router.push({
-            path: this.$route.query.redirect || "/"
-          });
-        })
-        .catch(error => {
-            alert(error)
-        });
-    }
-  }
+	data() {
+		return {
+			username: "admin"
+		};
+	},
+	methods: {
+		login() {		
+			this.$store.dispatch("user/login", { username: this.username })
+				.then(() => {
+					this.$router.push({ path: this.$route.query.redirect || "/" });  // 登录成功重定向	
+				})
+				.catch(error => {
+					alert(error)
+				});
+		}
+	}
 };
 </script>

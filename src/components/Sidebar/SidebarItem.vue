@@ -1,8 +1,7 @@
 <template>
   <div v-if="!item.hidden" class="menu-wrapper">
     <!-- 仅有一个可现实子路由，并且该子路由没有孩子路由 -->
-    <template v-if="hasOneShowingChild(item.children,item) && 
-    (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
+    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <router-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <!-- 菜单项 -->
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
