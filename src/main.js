@@ -16,4 +16,3 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
-"123"
