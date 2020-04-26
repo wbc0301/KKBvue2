@@ -13,13 +13,11 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import VuexTest from "@/components/vuex";
 
 export default {
 	name: "home",
 	components: {
-		HelloWorld,
-		VuexTest
+		HelloWorld
 	}
 };
 </script>

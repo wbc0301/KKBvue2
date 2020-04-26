@@ -14,6 +14,7 @@ const store = new Vuex.Store({
 
   getters: {  // 全局定义getters便于访问
     roles: state => state.user.roles,
+    token: state => state.user.token,
     permission_routes: state => state.permission.routes,
   }
 })

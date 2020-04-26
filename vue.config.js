@@ -1,5 +1,6 @@
 // resolve定义一个绝对路径获取函数
-const path = require('path')
+const path = require('path');
+const bodyParser = require("body-parser");
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -16,6 +17,38 @@ module.exports = {
     overlay: {
       warnings: true,
       errors: true
+    },
+    // proxy: {
+    //   // 代理 /dev-api/user/login 到 http://127.0.0.1:3000/user/login
+    //   [process.env.VUE_APP_BASE_API]: {
+    //     target: `http://127.0.0.1:3000/`,
+    //     changeOrigin: true, // 要不要变更origin头
+    //     pathRewrite: { // 地址重写：http://127.0.0.1:3000/user/login
+    //       ["^" + process.env.VUE_APP_BASE_API]: ""
+    //     }
+    //   }
+    // },
+    before: app => {
+      app.use(bodyParser.json());
+      
+      app.post("/dev-api/user/login", (req, res) => { // 登录接口声明
+        const { username } = req.body;
+
+        if (username === "admin" || username === "wbc") {
+          res.json({ code: 1, data: username });
+        } else {
+          res.json({ code: 10204, message: "用户名或密码错误" });
+        }
+      });
+
+      app.get("/dev-api/user/info", (req, res) => {
+        // 从请求头中获取令牌
+        // adfasdfkadf; ja;kdfj;akdfjakdsfj;akjdf; akjdf;kalsjf;ajf
+        // 令牌头         令牌体                     哈希
+        // 加密算法        用户信息,有效期          
+        const roles = req.headers['x-token'] === "admin" ? ["admin"] : ["editor"];
+        res.json({ code: 1, data: roles });
+      });
     }
   },
   lintOnSave: false,
