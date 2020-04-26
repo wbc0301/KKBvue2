@@ -20,7 +20,7 @@ const actions = {
     const { username } = userInfo;
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (username === "admin" || username === "jerry") {          
+        if (username === "admin" || username === "wbc") {          
           commit("SET_TOKEN", username); // 保存状态          
           setToken(username); // 写入cookie
           resolve();

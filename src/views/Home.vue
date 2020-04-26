@@ -2,7 +2,11 @@
   <div class="home">
     <h1>Home Page</h1>
     <router-view></router-view>
-    <!-- <VuexTest></VuexTest> -->
+
+    <!-- 测试自定义指令 -->
+    <button v-permission="['admin', 'editor']">editor button</button>
+    <button v-permission="['admin']">admin button</button>
+
   </div>
 </template>
 
@@ -12,10 +16,10 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import VuexTest from "@/components/vuex";
 
 export default {
-  name: "home",
-  components: {
-    HelloWorld,
-    VuexTest
-  }
+	name: "home",
+	components: {
+		HelloWorld,
+		VuexTest
+	}
 };
 </script>

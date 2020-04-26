@@ -8,6 +8,9 @@ import "./plugins/element.js";
 
 import "./permission";// 路由守卫
 
+import vPermission from './directive/permission';
+Vue.directive('permission', vPermission);
+
 Vue.config.productionTip = false;
 
 new Vue({
